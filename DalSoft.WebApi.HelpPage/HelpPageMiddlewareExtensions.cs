@@ -35,8 +35,7 @@ namespace DalSoft.WebApi.HelpPage
 
         public static string GetBinPath()
         {
-            var executingAssemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase) ?? string.Empty;
-            return executingAssemblyPath.Replace("file:\\", string.Empty);
+            return Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase)?.LocalPath);
         }
 
         private static IDictionary<string, object> DynamicToDictionary(dynamic o)
